@@ -1,0 +1,5 @@
+venv/*
+gemma3_1b_live_distilled_qwen/*
+unsloth_compiled_cache/*
+*.out
+__pycache__/*
