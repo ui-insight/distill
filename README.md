@@ -141,13 +141,16 @@ messages = [
 ]
 ```
 
-- We traing for 4 epochs and save QLoRA checkpoints at the end of each epoch
+- We trained for 4 epochs and save QLoRA checkpoints at the end of each epoch
 - Given the current batch size and models, this required at least 48GB of GPU RAM.  I used 2 Nvidia RTX 4090 GPUs.
 
 ---
 
 # EXAMPLE #1
-### Gemma3:1b output ***before*** distillation:
+### Gemma3:1b output ***before*** distillation 
+
+***(i.e., BEFORE learning how to think from Qwen3)***
+
 
 ```
 QUESTION:
@@ -166,6 +169,10 @@ Final Answer: The final answer is 62.
 ```
 
 ### Gemma3:1b output ***after*** QLoRA response distillation:
+***(i.e., AFTER learning how to think from Qwen3)***
+***Note the apparent reflection, self-doubt, double-checking***
+
+
 
 ```
 QUESTION:
@@ -206,130 +213,69 @@ The final answer is 62.
 
 
 # EXAMPLE #2
+### Gemma3:1b output ***before*** distillation 
 
+***(i.e., BEFORE learning how to think from Qwen3)***
 
 ```
 QUESTION:
-At a local café, smoothies are sold in two sizes: a small smoothie
-costs 3 dollars and a large smoothie costs 5 dollars. A group of 
-friends spends a total of 47 dollars, and they buy twice as many 
-small smoothies as large smoothies. How many small smoothies did they 
-buy, and what is the average cost per smoothie?
-
+At a local café, a small smoothie costs \$4. A group of friends buys 7 small smoothies. How much do they spend in total, and what is the average cost per smoothie?
 
 MODEL'S ANSWER:
 ----------------------------------------------------------------------
-Let s be the number of small smoothies bought and l be the number of large smoothies bought.  
-The cost of a small smoothie is 3 dollars, and the cost of a large smoothie is 5 dollars.  
-The total amount spent is 47 dollars. So, we have the equation:  
+Here's the breakdown:
 
-3s + 5l = 47  
+* **Total cost:** 7 smoothies \* \$4/smoothie = \$28
+* **Average cost per smoothie:** \$28 / 7 = \$4
 
-The group buys twice as many small smoothies as large smoothies, so s = 2l.  
-Now we have a system of two equations with two variables:  
-
-3s + 5l = 47  
-s = 2l  
-
-Substitute the second equation into the first equation:  
-
-3(2l) + 5l = 47  
-6l + 5l = 47  
-11l = 47  
-l = 47/11 ≈ 4.27  
-
-Since l must be an integer, we can approximate l to be 4. Then s = 2l = 2(4) = 8.  
-The cost of 8 small smoothies is 8 × 3 = 24 dollars.  
-The cost of 4 large smoothies is 4 × 5 = 20 dollars.  
-The total cost is 24 + 20 = 44 dollars.  
-However, we want the total cost to be 47 dollars.  
-
-Let s be the number of small smoothies and l be the number of large smoothies.  
-We are given that s = 2l.  
-The total cost is 3s + 5l = 47.  
-Substituting s = 2l, we get:  
-
-3(2l) + 5l = 47  
-6l + 5l = 47  
-11l = 47  
-l = 47/11  
-
-Since l must be an integer, we need to find integers s and l such that s = 2l and 3s + 5l = 47.  
-We can rewrite the equation as 3s + 5l = 47.  
-
-If l = 4, then 3s + 5(4) = 47, so 3s + 20 = 47, which means 3s = 27, so s = 9.  
-In this case, s = 2l becomes 9 = 2(4), which is 9 = 8, which is not true.  
-
-If l = 5, then 3s + 5(5) = 47, so 3s + 25 = 47, which means 3s = 22, so s = 22/3, which is not an integer.  
-
-Let's try to solve the equation 3s + 5l = 47 with s = 2l.  
-Substitute s = 2l into the equation:  
-
-3(2l) + 5l = 47  
-6l + 5l = 47  
-11l = 47  
-l = 47/11 ≈ 4.27  
-
-Since l must be an integer, we can try l = 4. Then s = 2(4) = 8.  
-The cost is 3(8) + 5(4) = 24 + 20 = 44.  
-We need to add 3 to the cost to get 47.  
-
-So we need to add 3 to the cost of the 8 small smoothies.  
-The cost of the 8 small smoothies is 3(8) = 24.  
-The cost of the 4 large smoothies is 5(4) = 20.  
-The total cost is 24 + 20 = 44.  
-We need to add 3 to the total cost, so we need to add 3 to the cost of the 8 small smoothies.  
-
-The cost of the 8 small smoothies is 3s = 3(8) = 24.  
-The cost of the 4 large smoothies is 5l = 5(4) = 20.  
-The total cost is 24 + 20 = 44.  
-We need to add 3 to the total cost, so we need to add 3 to the cost of the 8 small smoothies.  
-
-The cost of the 8 small smoothies is 3s = 3(2l) = 6l.  
-The cost of the 4 large smoothies is 5l.  
-The total cost is 3s + 5l = 47.  
-
-3(2l) + 5l = 47  
-6l + 5l = 47  
-11l = 47  
-l = 47/11 ≈ 4.27  
-
-We need to find integers s and l such that s = 2l and 3s + 5l = 47.  
-If l = 4, then s = 2(4) = 8. The cost is 3(8) + 5(4) = 24 + 20 = 44.  
-We need to add 3 to the total cost, so we need to add 3 to the cost of the 8 small smoothies.  
-
-The cost of the 8 small smoothies is 3s = 3(2l) = 6l.  
-We want 3s + 5l = 47.  
-
-If s = 2l, then 3(2l) + 5l = 6l + 5l = 11l = 47.  
-l = 47/11 ≈ 4.27.  
-
-Let l = 4, then s = 2(4) = 8. The cost is 3(8) + 5(4) = 24 + 20 = 44.  
-We need to add 3 to the total cost, so we need to add 3 to the cost of the 8 small smoothies.  
-
-The cost of the 8 small smoothies is 3s = 3(2l) = 6l.  
-We want 3s + 5l = 47.  
-
-If s = 2l, then 3(2l) + 5l = 6l + 5l = 11l = 47.  
-l = 47/11 ≈ 4.27.  
-
-Let l = 4, then s = 2(4) = 8. The cost is 3(8) + 5(4) = 24 + 20 = 44.  
-We need to add 3 to the total cost, so we need to add 3 to the cost of the 8 small smoothies.  
-
-The cost of the 8 small smoothies is 3s = 3(2l) = 6l.  
-We want 3s + 5l = 47.  
-
-If s = 2l, then 3(2l) + 5l = 6l + 5l = 11l = 47.  
+**Answer:** They spend \$28 in total, and the average cost per smoothie is \$4.
 ```
 
 
+### Gemma3:1b output ***after*** distillation 
 
+***(i.e., AFTER learning how to think from Qwen3)***
+***Note the apparent reflection, self-doubt, double-checking***
 
+```
+QUESTION:
+At a local café, a small smoothie costs $4. A group of friends buys 7 small smoothies. How much do they spend in total, and what is the average cost per smoothie?
 
+MODEL'S ANSWER:
+----------------------------------------------------------------------
+<think>
+First, I need to find out how much the group spends in total. The problem says a small smoothie costs $4. Since they buy 7 small smoothies, I should multiply 7 by 4.
 
+7 times 4 is 28. So the total cost is $28.
 
+Next, I need to find the average cost per smoothie. To do this, I divide the total cost by the number of smoothies.
 
+28 divided by 7 is 4.
 
+So the average cost per smoothie is $4.
+
+Let me double-check to make sure I didn't make a mistake. If they buy 7 smoothies at $4 each, that's 7*4=28. 28 divided by 7 is 4. That seems right.
+
+I don't think there's any trick here. The problem is straightforward: calculate the total cost and then find the average.
+</think>
+
+To determine the total cost and the average cost per smoothie, I will follow these steps:
+
+1. **Calculate the total cost**: A small smoothie costs $4.  
+   Since there are 7 small smoothies, the total cost is:  
+   $7 \times 4 = 28$.
+
+2. **Calculate the average cost**: Divide the total cost by the number of smoothies:  
+   $28 \div 7 = 4$.
+
+The average cost per smoothie is $4.
+
+I have verified this by multiplying 7 by 4 and dividing by 7.  
+$7 \times 4 = 28$, $28 \div 7 = 4$.  
+The result confirms the average cost per smoothie is $4.
+
+Final answer: $4<end_of_turn>
+```
 
 
 
