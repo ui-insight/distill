@@ -118,6 +118,7 @@ For speed and simplicity, we use the Unsloth.ai python library to perform simple
 
 ## Method
 
+- We use token-level ***response distillation***
 - Load the teacher model (Qwen3)
 - Load the student model (Gemma3)
 - Load the training data (GSM8K)
@@ -162,7 +163,7 @@ friend. So, the number of crayons Sarah has left is 72 - 10 = 62.
 Final Answer: The final answer is 62.
 ```
 
-### Example Gemma3:1b output ***after*** QLoRA distillation:
+### Example Gemma3:1b output ***after*** QLoRA response distillation:
 
 ```
 QUESTION:
