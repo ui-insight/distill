@@ -169,7 +169,8 @@ Final Answer: The final answer is 62.
 ```
 
 ### Gemma3:1b output ***after*** QLoRA response distillation:
-***(i.e., AFTER learning how to think from Qwen3)***
+***(i.e., AFTER learning how to think from Qwen3)*** 
+
 ***Note the apparent reflection, self-doubt, double-checking***
 
 
@@ -225,16 +226,17 @@ MODEL'S ANSWER:
 ----------------------------------------------------------------------
 Here's the breakdown:
 
-* **Total cost:** 7 smoothies \* \$4/smoothie = \$28
-* **Average cost per smoothie:** \$28 / 7 = \$4
+  Total cost:  7 smoothies * $4/smoothie = $28
+  Average cost per smoothie: $28 / 7 = $4
 
-**Answer:** They spend \$28 in total, and the average cost per smoothie is \$4.
+Answer: They spend $28 in total, and the average cost per smoothie is $4.
 ```
 
 
 ### Gemma3:1b output ***after*** distillation 
 
-***(i.e., AFTER learning how to think from Qwen3)***
+***(i.e., AFTER learning how to think from Qwen3)*** 
+
 ***Note the apparent reflection, self-doubt, double-checking***
 
 ```
@@ -263,19 +265,390 @@ To determine the total cost and the average cost per smoothie, I will follow the
 
 1. **Calculate the total cost**: A small smoothie costs $4.  
    Since there are 7 small smoothies, the total cost is:  
-   $7 \times 4 = 28$.
+   $7 times 4 = $28.
 
 2. **Calculate the average cost**: Divide the total cost by the number of smoothies:  
-   $28 \div 7 = 4$.
+   $28 div 7 = $4.
 
 The average cost per smoothie is $4.
 
 I have verified this by multiplying 7 by 4 and dividing by 7.  
-$7 \times 4 = 28$, $28 \div 7 = 4$.  
+$7 times 4 = $28, $28 div 7 = $4.  
 The result confirms the average cost per smoothie is $4.
 
-Final answer: $4<end_of_turn>
+Final answer: $4
 ```
 
+
+# EXAMPLE #3:   IMPOSSIBLE PROBLEM 
+## (INCONSISTENT CONSTRAINTS)
+### Gemma3:1b output ***before*** distillation 
+
+***(i.e., BEFORE learning how to think from Qwen3)***
+
+```QUESTION:
+In the town of Maple Junction, three bus routes connect the school, the library, and the train station.
+
+* The number of passengers on the school bus was twice the number on the library bus.
+* The number of passengers on the train station bus was 15 more than the number on the library bus.
+* The total number of passengers on all three buses was exactly 100.
+* Together, the school bus and the train station bus carried exactly 70 passengers.
+* More passengers rode the library bus than the school bus.
+
+Question: How many passengers rode each bus?
+
+MODEL'S ANSWER:
+----------------------------------------------------------------------
+
+Let's use variables to represent the number of passengers on each bus:
+
+   s = Number of passengers on the school bus
+   l = Number of passengers on the library bus
+   t = Number of passengers on the train station bus
+
+We can translate the given information into equations:
+
+   s = 2l  (The school bus had twice the number of passengers as the library bus)
+   t = l + 15 (The train station bus had 15 more passengers than the library bus)
+   s + t = 100 (The total number of passengers was 100)
+   s + l = 70 (More passengers rode the library bus than the school bus)
+
+Now we can solve the system of equations:
+
+1. Substitute:  Substitute the first two equations into the third equation:
+   (2l) + (l + 15) = 100
+
+2. Simplify and solve for l:
+   3l + 15 = 100
+   3l = 85
+   l = 85/3  = 28.33 (approximately)
+
+Since the number of passengers must be an integer, let's round l to 28.
+If l = 28, then s = 2 * 28 = 56
+Then, s + t = 56 + 28 = 84, which is not 100.
+
+Let's try to adjust the numbers slightly to make the sum 100.
+Let's assume the school bus has 56 passengers.
+Then, the library bus has 28 passengers.
+The train station bus has 15 more passengers than the library bus, so it has 28 + 15 = 43 passengers.
+The total number of passengers is 56 + 28 + 43 = 127. This is not 100.
+
+Let's try to adjust the numbers slightly to make the sum 100.
+Let's assume the school bus has 56 passengers.
+Then, the library bus has 28 passengers.
+The train station bus has 15 more passengers than the library bus, so it has 28 + 15 = 43 passengers.
+The total number of passengers is 56 + 28 + 43 = 127. This is not 100.
+
+Let's try to adjust the numbers slightly to make the sum 100.
+Let's assume the school bus has x passengers.
+Then, the library bus has x - 15 passengers.
+The train station bus has x + 15 passengers.
+We have the equation: x + (x - 15) + (x + 15) = 100
+3x = 100
+x = 33.333...
+
+Let's try x = 33.
+School bus = 33
+Library bus = 33 - 15 = 18
+Train station bus = 33 + 15 = 48
+Total = 33 + 18 + 48 = 99
+
+Let's try x = 34.
+School bus = 34
+Library bus = 34 - 15 = 19
+Train station bus = 34 + 15 = 49
+Total = 34 + 19 + 49 = 102
+
+So, we need to adjust the numbers slightly.
+
+Let's assume the school bus has 56 passengers.
+The library bus has 28 passengers.
+The train station bus has 15 more passengers than the library bus, so it has 28 + 15 = 43 passengers.
+Then, the total number of passengers is 56 + 28 + 43 = 127.
+We need to add 23 to this total.
+
+Let's say the school bus has x passengers.
+The library bus has x - 15 passengers.
+The train station bus has x + 15 passengers.
+x + (x - 15) + (x + 15) = 100
+3x = 100
+x = 33.333...
+
+We need to adjust the numbers so that the school bus has twice the number of passengers as the library bus.
+Let the school bus be x.
+The library bus is x - 15.
+The train station bus is x + 15.
+x + (x - 15) + (x + 15) = 100
+3x = 100
+x = 33.333...
+
+Let's try x = 33.
+School bus = 33
+Library bus = 33 - 15 = 18
+Train station bus = 33 + 15 = 48
+33 + 18 + 48 = 99
+
+We need to add 1 to the total.
+If we increase the school bus by 1, then the school bus is 34.
+The library bus is 18.
+The train station bus is 49.
+The total is 34 + 18 + 49 = 101.
+
+Let's try to adjust the numbers so that the school bus has twice the number of passengers as the library bus.
+Let the school bus be x.
+The library bus is x - 15.
+The train station bus is x + 15.
+x + (x - 15) + (x + 15) = 100
+3x = 100
+x = 33.333...
+
+We need to increase the school bus by 1, so the school bus is 34.
+The library bus is 33.
+The train station bus is 49.
+The total is 34 + 33 + 49 = 116.
+
+Let's try to increase the school bus by 1, so the school bus is 34.
+The library bus is 33.
+The train station bus is 49.
+The total is 34 + 33 + 49 = 116.
+
+We need to add 36 to the total.
+Let the school bus be x.
+The library bus is x - 15.
+The train station bus is x + 15.
+x + (x - 15) + (x + 15) = 100
+3x = 100
+x = 33.333...
+
+We need to increase the school bus by 1, so let's say the school bus is 34.
+The library bus is 34 - 15 = 19.
+The train station bus is 34 + 15 = 49.
+34 + 19 + 49 = 102.
+
+Let's say the school bus is 33.
+The library bus is 33 - 15 = 18.
+The train station bus is 33 + 15 = 48.
+33 + 18 + 48 = 99.
+
+We need to add 1 to the total.
+If we increase the school bus by 1, then the school bus is 34.
+The library bus is 33.
+The train station bus is 49.
+The total is 34 + 33 + 49 = 116.
+
+Final Answer: The final answer is 33
+```
+
+***NOTE:*** The answer of 33 is *incorrect* as this problem has no solution.
+
+
+### Gemma3:1b output ***after*** distillation 
+
+***(i.e., AFTER learning how to think from Qwen3)*** 
+
+***Note the apparent reflection, self-doubt, double-checking*** 
+
+***This distilled version of Gemma correctly determines the problem is unsolvable!!!*** 
+
+
+```QUESTION:
+In the town of Maple Junction, three bus routes connect the school, the library, and the train station.
+
+* The number of passengers on the school bus was twice the number on the library bus.
+* The number of passengers on the train station bus was 15 more than the number on the library bus.
+* The total number of passengers on all three buses was exactly 100.
+* Together, the school bus and the train station bus carried exactly 70 passengers.
+* More passengers rode the library bus than the school bus.
+
+Question: How many passengers rode each bus?
+
+MODEL'S ANSWER:
+----------------------------------------------------------------------
+<think>Okay, let's try to figure out how many passengers rode each bus. Hmm, the problem says: "More passengers rode the library bus than the school bus." So, I need to find the number of passengers on the library bus and the number of passengers on the school bus.
+
+First, let's list out what we know:
+
+1. The number of passengers on the school bus was twice the number on the library bus.
+2. The number of passengers on the train station bus was 15 more than the number on the library bus.
+3. The total number of passengers on all three buses was exactly 100.
+4. Together, the school bus and the train station bus carried exactly 70 passengers.
+5. More passengers rode the library bus than the school bus.
+
+Let me break down each part.
+
+First, let's define variables to make it easier. Let's say:
+
+- Let's call the number of passengers on the library bus as L.
+- Let's call the number of passengers on the school bus as S.
+
+From the problem, we know:
+
+1. S = 2L  (The number of passengers on the school bus was twice the number on the library bus)
+2. T = L + 15 (The number of passengers on the train station bus was 15 more than the number on the library bus)
+3. S + T = 70 (Together, the school bus and the train station bus carried exactly 70 passengers)
+4. L > S (More passengers rode the library bus than the school bus)
+
+Let me see if I can use substitution to find L and S.
+
+From (1), S = 2L. So, substitute that into (3):
+
+2L + T = 70
+
+Also, since S + T = 70, and S = 2L, then T = 70 - S = 70 - 2L.
+
+Now, substitute S = 2L into the equation 2L + T = 70:
+
+2L + (70 - 2L) = 70
+
+This simplifies to 70 = 70, which is true. So, the equation is consistent.
+
+Let me check if I can use the fact that L > S.
+
+If L > S, then L is the number of passengers on the library bus, and S is the number of passengers on the school bus.
+
+So, L > 2L. That doesn't make sense because 2L is 2 times L, so L > 2L is false.
+
+Wait, no, let me think again.
+
+The problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let's try to find L and S.
+
+From (1), S = 2L.
+
+From (3), S + T = 70, so 2L + T = 70.
+
+From (2), T = L + 15.
+
+Substituting T into the first equation: 2L + (L + 15) = 70
+
+This simplifies to 3L + 15 = 70
+
+3L = 55
+
+L = 55 / 3 = 18.333...
+
+So, L = 18.333...
+
+Then, S = 2L = 36.666...
+
+Let me check if that makes sense.
+
+If L = 18, then S = 2L = 36.
+
+Then, T = L + 15 = 18 + 15 = 33.
+
+S + T = 36 + 33 = 69, which is not 70.
+
+Oh, that's a problem. Let me re-read the problem.
+
+"More passengers rode the library bus than the school bus." So, L > S.
+
+"The number of passengers on the train station bus was 15 more than the number on the library bus." So, T = L + 15.
+
+"The total number of passengers on all three buses was exactly 100." So, S + T = 70.
+
+"Together, the school bus and the train station bus carried exactly 70 passengers." So, S + T = 70.
+
+"More passengers rode the library bus than the school bus." So, L > S.
+
+Hmm, the problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let me try to find L and S.
+
+From (1), S = 2L.
+
+From (3), T = L + 15.
+
+From (2), S + T = 70, so 2L + (L + 15) = 70 => 3L + 15 = 70 => 3L = 55 => L = 55/3 = 18.333...
+
+S = 2L = 36.666...
+
+Let's see if that makes sense.
+
+If L = 18, then S = 36.
+
+T = 18 + 15 = 33.
+
+S + T = 36 + 33 = 69, which is not 70.
+
+Hmm, that's a problem. Let me think again.
+
+The problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let's try to find L and S.
+
+From (1), S = 2L.
+
+From (3), T = L + 15.
+
+From (2), S + T = 70, so 2L + (L + 15) = 70 => 3L + 15 = 70 => 3L = 55 => L = 55/3 = 18.333...
+
+S = 2L = 36.666...
+
+Hmm, that's still not consistent.
+
+Let me try to model it with variables.
+
+Let L = L (library bus)
+Let S = 2L (school bus)
+Let T = L + 15 (train station bus)
+Let T' = T = 70 - S = 70 - (L + 15) = 55 - L (train station bus)
+
+Then, L > S => L > 2L => 0 = L => L = 0 (not possible)
+
+Let's try to find L and S such that L > S and S + T = 70.
+
+S + T = 70 => S + (L + 15) = 70 => 2L + L + 15 = 70 => 3L = 55 => L = 55/3 = 18.333...
+
+S = 2L = 36.666...
+
+Hmm, that's still not consistent.
+
+I think there's a mistake in the problem statement. The problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let me re-read the problem:
+
+"More passengers rode the library bus than the school bus." So, L > S.
+
+"The number of passengers on the train station bus was 15 more than the number on the library bus." So, T = L + 15.
+
+"The total number of passengers on all three buses was exactly 100." So, S + T = 70.
+
+"Together, the school bus and the train station bus carried exactly 70 passengers." So, S + T = 70.
+
+"More passengers rode the library bus than the school bus." So, L > S.
+
+Hmm, the problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let's try to find L and S.
+
+From (1), S = 2L.
+
+From (3), T = L + 15.
+
+From (2), S + T = 70 => 2L + (L + 15) = 70 => 3L + 15 = 70 => 3L = 55 => L = 55/3 = 18.333...
+
+S = 2L = 36.666...
+
+Hmm, that's still not consistent.
+
+I think there's a problem with the numbers. The problem says "More passengers rode the library bus than the school bus." So, L > S.
+
+Let me try to find a combination that works.
+
+Suppose L = 18. Then S = 2L = 36.
+
+T = L + 15 = 18 + 15 = 33.
+
+S + T = 36 + 33 = 69, which is not 70.
+
+I think there's a mistake in the problem statement.
+
+```
+
+Note the ***correct*** conclusion with the distilled Qwen3->Gemma3 model: 
+
+***I think there's a mistake in the problem statement.***
 
 
