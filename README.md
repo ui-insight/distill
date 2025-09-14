@@ -118,7 +118,7 @@ For speed and simplicity, we use the Unsloth.ai python library to perform simple
 
 ## Method
 
-- We use token-level ***response distillation***
+- We use ***token-level response distillation***
 - Load the teacher model (Qwen3)
 - Load the student model (Gemma3)
 - Load the training data (GSM8K)
