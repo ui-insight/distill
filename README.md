@@ -1,7 +1,10 @@
-# distill
+# Distill
 Create a mathematical reasoning model through distillation.
 
+
 <img width="512" height="512" alt="unnamed" src="https://github.com/user-attachments/assets/f9965896-2f3c-44a5-bc78-70a574fb3fd8" />
+
+<img width="400" height="180" alt="poop" src="https://github.com/user-attachments/assets/921e7016-c14f-4396-ba9f-a8b27d200d67" />
 
 <p>&nbsp;</p>  
 
@@ -93,3 +96,115 @@ The student is trained to match ***internal hidden states or representations*** 
 **Complexity:**  
 - Highest complexity.  
 - Requires careful mapping of teacher layers to student layers.  
+
+---
+
+## Let's Have Qwen3 Teach Gemma3 to do Math!!
+
+<img width="691" height="273" alt="Untitled 2" src="https://github.com/user-attachments/assets/8b9fbc1c-801d-4812-b5f8-bcd13c3bd69c" />
+
+<p>&nbsp;</p>
+
+Here, we demonstrate simple ***Token-level Response Distillation***.
+
+In **distill.py** we use load a 4B parameter **Qwen/Qwen3-4B-Thinking-2507** as the teaching model, as it will output properly-formatted Chain-of-Thought thinking traces before answering.   
+
+We use Google's 1B parameter **Gemma3-1b instruct** model as the smaller student.  It is a tiny 1B model and doesn't emit CoT by default and struggles with tasks like math.
+
+
+For speed and simplicity, we use the Unsloth.ai python library to perform simple causal supervised fine-tuning (SFT) using the SFTTrainer trainer to teach the student Gemma3:1b model how to reason about math.
+
+<img width="300" height="300" alt="_1d5a5685-2d88-44ca-b50f-ba432cd646ef_9CGCY8lvw4D9JkOdueqsk jpeg copy" src="https://github.com/user-attachments/assets/680498d8-95ff-4529-82e9-0e52e00ec6f0" />
+
+## Method
+
+- Load the teacher model (Qwen3)
+- Load the student model (Gemma3)
+- Load the training data (GSM8K)
+- Use Quantized Low-Rank Adaptation (QLoRA) applied to the student (Gemma3)
+- The teacher model reads the questions from GSM8K and produces full response
+- This creates an interstitial training set:
+
+```
+{
+  "question": "Mimi picked up 2 dozen seashells...",
+  "qwen3_answer": "<think>First Mimi has 24...</think> Therefore, answer is 16."
+}
+```
+- The student is then presented with properly formatted training data from the teacher:
+
+```
+messages = [
+    {"role": "user", "content": "Question: Mimi picked up 2 dozen seashells..."},
+    {"role": "assistant", "content": "<think>First Mimi has 24...</think> Therefore, answer is 16."},
+]
+```
+
+- We traing for 4 epochs and save QLoRA checkpoints at the end of each epoch
+- Given the current batch size and models, this required at least 48GB of GPU RAM.  I used 2 Nvidia RTX 4090 GPUs.
+
+---
+
+### Example Gemma3:1b output ***before*** distillation:
+
+```
+QUESTION:
+Sarah has 3 boxes of crayons. Each box has 24 crayons. She gives 10 crayons to her friend. How many crayons does Sarah have left?
+
+MODEL'S ANSWER:
+----------------------------------------------------------------------
+Let C be the number of crayons in each box. Let N be the number of 
+boxes Sarah has. We are given that Sarah has 3 boxes of crayons, 
+so N = 3. Each box has 24 crayons, so C = 24. The total number of 
+crayons is N × C = 3 × 24 = 72 crayons. Sarah gives 10 crayons to her 
+friend. So, the number of crayons Sarah has left is 72 - 10 = 62. 
+
+Final Answer: The final answer is 62.
+```
+
+### Example Gemma3:1b output ***after*** QLoRA distillation:
+
+```
+QUESTION:
+Sarah has 3 boxes of crayons. Each box has 24 crayons. She gives 10 crayons to her friend. How many crayons does Sarah have left?
+
+MODEL'S ANSWER:
+----------------------------------------------------------------------
+<think>
+First, I need to find out how many crayons Sarah has left after giving 10 crayons to her friend.
+She starts with 3 boxes of crayons. Each box has 24 crayons. So, the total number of crayons she has initially is 3 boxes * 24 crayons/box = 72 crayons.
+
+Then, she gives 10 crayons to her friend. So, I need to subtract 10 from the total.
+
+72 - 10 = 62.
+
+Wait, let me double-check. If she has 3 boxes * 24 = 72 crayons. Then she gives 10, so 72 - 10 = 62. That seems right.
+
+I don't think I made a mistake here. The problem says "she gives 10 crayons to her friend," so it's straightforward subtraction.</think>
+
+Sarah starts with 3 boxes of crayons, each containing 24 crayons.
+Total crayons = 3 * 24 = 72 crayons.
+
+She gives 10 crayons to her friend.
+Crayons left = 72 - 10 = 62.
+
+The final answer is 62.
+
+62
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
